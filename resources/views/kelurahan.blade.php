@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_kelurahan as $kelurahan)
+                        @foreach ($data_kelurahan as $kel => $kelurahan)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $kelurahan->kode_kel }}</td>
