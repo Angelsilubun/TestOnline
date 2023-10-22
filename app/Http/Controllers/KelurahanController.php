@@ -31,32 +31,34 @@ class KelurahanController extends Controller
             'id_kec'
         ]);
 
-        return redirect()->route('kecamatan.index')->with('succes', 'Data kecamatan berhasil ditambah');
+        return redirect()->route('kelurahan.index')->with('succes', 'Data kecamatan berhasil ditambah');
     }
 
-    // public function update(Request $request, $id): RedirectResponse
-    // {
-    //     $this->validate($request, [
-    //         'kode_kec' => 'required',
-    //         'nama_kecamatan' => 'required',
-    //     ]);
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $this->validate($request, [
+            'kode_kel' => 'required',
+            'nama_kel' => 'required',
+            'id_kec' => 'required'
+        ]);
 
-    //     $data_kecamatan = kecamatan::findOrfail($id);
+        $data_kelurahan = kelurahan::findOrfail($id);
 
-    //     kecamatan::update([
-    //         'kode_kec' => $request->kode_kec,
-    //         'nama_kecamatan' => $request->nama_kecamatan,
-    //     ]);
+        $data_kelurahan->update([
+            'kode_kel' => $request->kode_kel,
+            'nama_kel' => $request->nama_kel,
+            'id_kec' => $request->id_kec
+        ]);
 
-    //     return redirect()->route('kecamatan.index')->with('succes', 'Data kecamatan berhasil ditambah');
-    // }
+        return redirect()->route('kelurahan.index')->with('succes', 'Data kecamatan berhasil ditambah');
+    }
 
-    // public function destroy(Request $request, $id)
-    // {
-    //     $data_kecamatan = kecamatan::findOrfail($id);
+    public function destroy(Request $request, $id)
+    {
+        $data_kelurahan = kelurahan::findOrfail($id);
 
-    //     $data_kecamatan->delete();
+        $data_kelurahan->delete();
 
-    //     return back();
-    // }
+        return back();
+    }
 }

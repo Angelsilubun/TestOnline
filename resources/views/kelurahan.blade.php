@@ -37,7 +37,9 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $kelurahan->kode_kel }}</td>
                                 <td>{{ $kelurahan->nama_kel }}</td>
-                                <td>{{ $kelurahan->kecamatan->nama_kecamatan }}</td>
+                                <td>{{ $kelurahan->kecamatan ? $kelurahan->kecamatan->nama_kecamatan : 'Tidak ada kecamatan' }}
+                                </td>
+
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
@@ -52,7 +54,7 @@
                                         <form onsubmit="return confirm('hapus?');"
                                             action="{{ route('kelurahan.destroy', $kelurahan->id) }}" method="POST">
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editKec{{ $kelurahan->id }}">
+                                                data-bs-target="#editKel{{ $kelurahan->id }}">
                                                 edit
                                             </button>
                                             @csrf
@@ -69,7 +71,7 @@
         </div>
     </div>
 
-    @include('edit_prov')
+    @include('edit_kel')
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -83,7 +85,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Kode</label>
-                            <input type="text" name="kode" class="form-control" id="kode"
+                            <input type="text" name="kode_kel" class="form-control" id="kode"
                                 value="{{ old('kode_kel') }}">
                         </div>
                         <div class="mb-3">
@@ -92,10 +94,11 @@
                                 value="{{ old('nama_kel') }}">
                         </div>
                         <div class="mb-3">
-                            <select name="kecamatan_id" id="kecamatan_id" class="form-select" aria-label="Default select example">
+                            <select name="kecamatan_id" id="kecamatan_id" class="form-select"
+                                aria-label="Default select example">
                                 <option selected>Pilih Kecamatan</option>
-                                @foreach($kecamatan as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama_kecamatan }}</option>
+                                @foreach ($kecamatans as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kecamatan }}</option>
                                 @endforeach
                             </select>
                         </div>

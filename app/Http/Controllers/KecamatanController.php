@@ -37,9 +37,9 @@ class KecamatanController extends Controller
             'nama_kecamatan' => 'required',
         ]);
 
-        $data_kecamatan = kecamatan::findOrfail($id);
+        $data_kecamatan = kecamatan::find($id);
 
-        kecamatan::update([
+        $data_kecamatan->update([
             'kode_kec' => $request->kode_kec,
             'nama_kecamatan' => $request->nama_kecamatan,
         ]);

@@ -37,9 +37,9 @@ class ProvinsinController extends Controller
             'nama_provinsi' => 'required',
         ]);
 
-        $data_provinsi = provinsi::findOrfail($id);
+        $data_provinsi = provinsi::find($id);
 
-        provinsi::update([
+        $data_provinsi->update([
             'kode' => $request->kode,
             'nama_provinsi' => $request->nama_provinsi,
         ]);
